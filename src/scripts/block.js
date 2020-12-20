@@ -1,14 +1,16 @@
 class Block{
-    constructor(x, w, m, v){
+    constructor(x, w, m, v, xConstrain){
         this.x = x;
         this.y = height - w;
         this.w = w;
         this.m = m;
         this.v = v;
+        this.xc = xConstrain;
     }
 
     show(){
-        image(blockImg, this.x, this.y, this.w, this.w);
+        let xCon = constrain(this.x, this.xc, displayWidth);
+        image(blockImg, xCon, this.y, this.w, this.w);
     }
 
     collide(collidingBlock){
