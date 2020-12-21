@@ -17,7 +17,7 @@ function preload() {
 
 function setup() {
   noLoop();
-  var canvas = createCanvas(displayWidth, 250);
+  var canvas = createCanvas(select('main').size()['width'], 250);
   canvas.parent('canvasHolder');
 
   setupGUI();
