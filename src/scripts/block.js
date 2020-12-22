@@ -9,7 +9,7 @@ class Block{
     }
 
     show(){
-        let xCon = constrain(this.x, this.xc, displayWidth);
+        let xCon = constrain(this.x, this.xc, 900000);
         image(blockImg, xCon, this.y, this.w, this.w);
     }
 

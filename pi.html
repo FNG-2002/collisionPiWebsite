@@ -5,10 +5,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=0.75">
 
         <script defer src="/src/p5lib/p5.min.js"></script>
-
-        <script defer src="/src/scripts/main.js"></script>
+        <script defer src="/src/p5lib/grafica.min.js"></script>
+        
+        <script defer src="/src/scripts/plot.js"></script>
         <script defer src="/src/scripts/block.js"></script>
-
+        <script defer src="/src/scripts/main.js"></script>
+        
         <title>PI berechnen mit Kollision</title>
 
         <style>
@@ -32,7 +34,7 @@
                 <h1>Einstellungen</h1>
                 <div id="buttonControls" style="border-style: dashed;padding: 1rem;margin-right: auto;">
                     <div id="inputDigitAmount" style="width: min-content; display: flex;justify-content: center;flex-direction: column;">
-                        <p style="margin: unset;text-align: center;font-weight: bold; margin-bottom: 1rem;">Anzahl der Nachkommastellen</p>
+                        <p style="margin: unset;text-align: center;font-weight: bold; margin-bottom: 1rem; font-size: x-large;">Masse</p>
                     </div>
                 </div>
             </div>
@@ -40,11 +42,8 @@
             <div id="playControls"></div>
             <hr style="margin-bottom: 2rem;">
 
-            <div style="display: flex; justify-content: center;">
-                <div style="width: 50%;">
-                    <h1 style="text-align: center;">GRAPH</h1>
-                    <p style="text-align: center;">Coming soon</p>
-                </div>
+            <div id="graphHolder" style="display: flex; justify-content: center; flex-direction: column; align-items: center; margin-bottom: 1rem; margin-top: 0.5rem; margin-bottom: 0.5rem; width: 100%; height: 100%;">
+                <!-- <h1 style="text-align: center;">GRAPH</h1> -->
             </div>
         </main>
     </body>
