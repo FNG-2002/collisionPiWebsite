@@ -6,7 +6,7 @@ class PlotHelper{
         
     var createPlotCanvas = function(p) {
         var width = select('main').size()['width'];
-        var height = 500;
+        var height = 400;
     
     
         // Initial setup
@@ -14,21 +14,21 @@ class PlotHelper{
         // Create the canvas
         var canvas = p.createCanvas(width, height+100);
         canvas.parent('graphHolder');
-        p.background(255);
+        p.background(colorBG);
     
         // Prepare the points for the plot
         var points = [];
         var nPoints = 100;
     
         for (var i = 0; i < nPoints; i++) {
-            points[i] = new GPoint(p.sin(p.TWO_PI * i / (nPoints - 1)) * Math.sqrt(block2.m), p.cos(p.TWO_PI * i / (nPoints - 1))*Math.sqrt(block2.m) * -1);
+            points[i] = new GPoint(p.sin(p.TWO_PI * i / (nPoints - 1)) * Math.sqrt(block2.m) * startVel, p.cos(p.TWO_PI * i / (nPoints - 1))*Math.sqrt(block2.m) * startVel);
         }
         
     
         // Create a new plot and set its position on the screen
         p.plot = new GPlot(p);
     
-        var plotWidth = width;
+        var plotWidth = width-50;
         p.plot.setDim([plotWidth, height]);
         var xPos = (width/2) - (plotWidth/2) - 50;
         p.plot.setPos(xPos, 0);
@@ -38,8 +38,8 @@ class PlotHelper{
 
         // Set the plot title and the axis labels
         p.plot.setPoints(points);
-        p.plot.getXAxis().setAxisLabelText("x axis");
-        p.plot.getYAxis().setAxisLabelText("y axis");
+        p.plot.getXAxis().setAxisLabelText("x = sqrt(m1)*v1");
+        p.plot.getYAxis().setAxisLabelText("y = sqrt(m2)*v2");
         p.plot.setTitleText("Phasenraumdiagramm");
     
         // Draw it!
@@ -62,18 +62,15 @@ class PlotHelper{
 
         
         p.refreshPlot = function(punkte){
-            p.background(255);
+            p.background(colorBG);
             p.plot.beginDraw();
             p.plot.drawBox();
             p.plot.drawXAxis();
             p.plot.drawYAxis();
             p.plot.drawTitle();
-            p.plot.drawLines();
-            p.plot.endDraw();
             p.plot.getLayer("surface").setPoints(punkte);
-            p.plot.beginDraw();
             p.plot.getLayer("surface").drawPoints();
-            p.plot.getLayer("surface").drawLines();
+            p.plot.drawLines();
             p.plot.endDraw();
         };
 

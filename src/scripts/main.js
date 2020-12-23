@@ -8,6 +8,10 @@ let counter = 0;
 
 let mass = 100;
 
+let startVel = -4;
+
+let colorBG = '#ccc9c2';
+
 
 // Explizites Euler-Verfahren
 let timeSteps = 1000000;
@@ -26,16 +30,20 @@ function setup() {
   //PI (Collision) Canvas
   var canvas = createCanvas(select('main').size()['width'], 250);
   canvas.parent('canvasHolder');
-
-  setupGUI();
-
+  
+  
   createBlocks();
-
+  
+  setupGUI();
+  
   recreatePlot();
+
+  // ??? WHY ???
+  canvas.width = select('main').size()['width'];
 }
 
 function draw() {
-  background(200);
+  background(colorBG);
 
   updateCounter();
 
@@ -87,24 +95,41 @@ function setupGUI(){
   buttonStart.parent('playControls');
   buttonStart.mousePressed(toggleCalculation);
 
+  let buttonReset = createButton('Reset');
+  buttonReset.id('buttonReset');
+  buttonReset.parent('playControls');
+  buttonReset.style('float', 'right');
+  buttonReset.mousePressed(resetAnim);
+
 
   let inputDigits = createInput(mass.toString(), 'number');
   inputDigits.id('inputDigits');
   inputDigits.parent('inputDigitAmount');
+  inputDigits.attribute('min', '1');
   inputDigits.input(changeAmountOfDigits);
+
+  let inputVelocity = createInput(startVel.toString(), 'number');
+  inputVelocity.id('inputVelocityInput');
+  inputVelocity.parent('inputVelocity');
+  inputVelocity.input(changeVelocity);
 
   let inputHint = createP("<strong>Achtung:</strong> <br> Bei einem Wert > 100^8 kann es lange dauern!");
   inputHint.parent('inputDigitAmount');
   inputHint.style('margin', 'unset');
   inputHint.style('margin-top', '0.2rem');
   inputHint.style('font-size', 'small');
+
+
+  let checkboxGraph = select('#checkboxGraph');
+  checkboxGraph.changed(toggleGraph);
+
 }
 
 
 function createBlocks(){
   //           x-Pos. Breite Masse Geschw.
   block1 = new Block(100, 75, 1, 0, 0);
-  block2 = new Block(300, 135, (Number)(mass), -1/timeSteps, block1.w);
+  block2 = new Block(300, 135, (Number)(mass), startVel/timeSteps, block1.w);
   counter = 0;
 }
 
@@ -119,19 +144,75 @@ function recreatePlot(){
 
 // ############## GUI FUNCTION SECTION ############################
 function changeAmountOfDigits(){
-  mass = this.value();
+  if (this.value() != ""){
+    if (this.value() > 0){
+      document.getElementById('alert').style.display = "none";
+      buttonStart.disabled = false;
+      buttonReset.disabled = false;
+      document.getElementById('inputVelocityInput').disabled = false
+      mass = this.value();
+      createBlocks();
+      plot.removePlot();
+      recreatePlot();
+      redraw();
+    } else {
+      buttonStart.disabled = true;
+      buttonReset.disabled = true;
+      document.getElementById('inputVelocityInput').disabled = true;
+      document.getElementById('alert').style.display = null;
+      //alert("Die Masse muss größer als 0 sein!");
+    }
+  } else {
+    buttonStart.disabled = true;
+    buttonReset.disabled = true;
+    document.getElementById('inputVelocityInput').disabled = true;
+  }
+}
+
+function resetAnim(){
+  createBlocks();
+  redraw();
+  plot.punkte = [];
+  plot.fuegePunktHinzu(Math.sqrt(block2.m)*block2.v*timeSteps, Math.sqrt(block1.m)*block1.v);
+  plot.aktualisierePlot();
+}
+
+function changeVelocity(){
+  startVel = this.value();
   createBlocks();
   plot.removePlot();
   recreatePlot();
+  redraw();
 }
 
 
 function toggleCalculation(){
   if (isLooping()){
     document.getElementById(buttonStart.id).textContent = "Start";
+    document.getElementById('inputVelocityInput').disabled = false;
+    document.getElementById('inputDigits').disabled = false;
+    document.getElementById('checkboxGraph').disabled = false;
     noLoop();
   } else {
     document.getElementById(buttonStart.id).textContent = "Pause";
+    document.getElementById('inputVelocityInput').disabled = true;
+    document.getElementById('inputDigits').disabled = true;
+    document.getElementById('checkboxGraph').disabled = true;
     loop();
+  }
+}
+
+
+function toggleGraph(){
+  if (this.checked()){
+    select('#graphHolder').style('display', '');
+    createBlocks();
+    recreatePlot();
+    redraw();
+  } else {
+    plot.removePlot();
+    select('#graphHolder').style('display', 'none');
+    createBlocks();
+    redraw();
   }
 }

@@ -2,7 +2,7 @@
     <html lang="de">
     <head>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=0.75">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <script defer src="/src/p5lib/p5.min.js"></script>
         <script defer src="/src/p5lib/grafica.min.js"></script>
@@ -26,21 +26,35 @@
                     margin: 1rem;
                 }
             }
+
+
         </style>
     </head>
-    <body id="main">
+    <body id="main" style="overflow-y: scroll;">
         <main>
+            <div id="alert" style="padding: 0.25rem; background-color: #f44336; color: white; border-radius: 1rem; margin-top: 2rem; max-width: 100%; display: none;">
+                <p style="text-align: center;"><strong>Achtung!</strong> Die Masse muss größer als 0 sein!</p>
+              </div> 
             <div>
                 <h1>Einstellungen</h1>
-                <div id="buttonControls" style="border-style: dashed;padding: 1rem;margin-right: auto;">
+                <div id="buttonControls" style="border-style: dashed;padding: 1rem;margin-right: auto; display: flex; flex-wrap: nowrap; gap: 5rem; align-items: baseline; overflow-y: auto;">
                     <div id="inputDigitAmount" style="width: min-content; display: flex;justify-content: center;flex-direction: column;">
                         <p style="margin: unset;text-align: center;font-weight: bold; margin-bottom: 1rem; font-size: x-large;">Masse</p>
+                    </div>
+                    <div id="inputVelocity" style="width: min-content; display: flex;justify-content: center;flex-direction: column;">
+                        <p style="margin: unset;text-align: center;font-weight: bold; margin-bottom: 1rem; font-size: x-large;">Startgeschwindigkeit</p>
+                    </div>
+                    <div id="checkboxGraphDiv" style="width: min-content; display: flex;justify-content: center;flex-direction: column;">
+                        <p style="margin: unset;text-align: center;font-weight: bold; margin-bottom: 1rem; font-size: x-large; white-space: nowrap;">Graphen anzeigen</p>
+                        <input id="checkboxGraph" type="checkbox" checked>
                     </div>
                 </div>
             </div>
             <div id="canvasHolder" style="margin-top: 0.5rem; margin-bottom: 0.5rem; width: 100%; height: 100%;"></div>
             <div id="playControls"></div>
+            
             <hr style="margin-bottom: 2rem;">
+
 
             <div id="graphHolder" style="display: flex; justify-content: center; flex-direction: column; align-items: center; margin-bottom: 1rem; margin-top: 0.5rem; margin-bottom: 0.5rem; width: 100%; height: 100%;">
                 <!-- <h1 style="text-align: center;">GRAPH</h1> -->
