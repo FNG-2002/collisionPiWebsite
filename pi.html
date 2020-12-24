@@ -16,49 +16,168 @@
         <style>
 
             #main{
+                font-family: "Lucida Console", "Courier New", monospace;
                 max-width: 75%;
                 margin: auto;
+                background-color: #e2ded5;
             }
 
             @media screen and (max-width: 800px){
                 #main{
                     max-width: 100%;
-                    margin: 1rem;
+                    margin: 0.25rem;
+                    border: unset;
                 }
+
+                .breakOnPhone{
+                    flex-wrap: nowrap;
+                    flex-direction: column !important;
+                }
+
+                .breakOnPhone2{
+                    max-width: 100% !important;
+                    overflow-y: auto;
+                }
+
+            }
+
+            button {
+                background-color: #ccc9c2;
+                color: black;
+                border: none;
+                border-style: solid;
+                border-color: gray;
+                padding: 16px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                transition-duration: 0.4s;
+                cursor: pointer;
+            }
+
+            button:not(button:disabled):hover {
+                background-color: white;
+                color: black;
+                box-shadow: 0 3px 3px 0 rgba(0,0,0,0.24), 0 5px 5px 0 rgba(0,0,0,0.19);
+            }
+
+            button:disabled {
+                 opacity: 0.6;
+                 cursor: not-allowed;
+            }   
+
+            .switch {
+                position: relative;
+                display: inline-block;
+                width: 60px;
+                height: 34px;
+            }
+
+            .switch input { 
+                opacity: 0;
+                width: 0;
+                height: 0;
+            }
+
+            .slider {
+                position: absolute;
+                cursor: pointer;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: lightgray;
+                -webkit-transition: .4s;
+                transition: .4s;
+            }
+
+            .slider:before {
+                position: absolute;
+                content: "";
+                height: 26px;
+                width: 26px;
+                left: 4px;
+                bottom: 4px;
+                background-color: white;
+                -webkit-transition: .4s;
+                transition: .4s;
+            }
+
+            input:checked + .slider {
+                background-color:  #93c593;
+            }
+
+            input:checked + .slider:before {
+                -webkit-transform: translateX(26px);
+                -ms-transform: translateX(26px);
+                transform: translateX(26px);
+            }
+
+            /* Rounded sliders */
+            .slider.round {
+                border-radius: 20px;
+            }
+
+            .slider.round:before {
+                border-radius: 50%;
             }
 
 
         </style>
     </head>
     <body id="main" style="overflow-y: scroll;">
+
+        <div style="display: flex; flex-direction: column; float: right;">
+            <h4 style="margin: 0.2rem; text-align: right;">name1</h4>
+            <h4 style="margin: 0.2rem; text-align: right;">name2</h4>
+            <h4 style="margin: 0.2rem; text-align: right;">name3</h4>
+        </div>
+        
+        <h1>Diskrete Mathematik</h1>
+        <h3>Projektarbeit Hochschule Rhein-Waal Diskrete Mathematik 2020/2021.</h3>
+
+        <hr>
+
         <main>
             <div id="alert" style="padding: 0.25rem; background-color: #f44336; color: white; border-radius: 1rem; margin-top: 2rem; max-width: 100%; display: none;">
                 <p style="text-align: center;"><strong>Achtung!</strong> Die Masse muss größer als 0 sein!</p>
-              </div> 
-            <div>
-                <h1>Einstellungen</h1>
-                <div id="buttonControls" style="border-style: dashed;padding: 1rem;margin-right: auto; display: flex; flex-wrap: nowrap; gap: 5rem; align-items: baseline; overflow-y: auto;">
-                    <div id="inputDigitAmount" style="width: min-content; display: flex;justify-content: center;flex-direction: column;">
-                        <p style="margin: unset;text-align: center;font-weight: bold; margin-bottom: 1rem; font-size: x-large;">Masse</p>
+            </div> 
+            <div class="breakOnPhone" style="display: flex; flex-direction: row;">
+                <div style="display: flex; flex-direction: column;" >
+                    <h1 style="align-self: flex-start; margin-bottom: 1rem; margin-top: 1rem;">Infos</h1>
+                    <div class="breakOnPhone2" style="height: 100%; background-color: #ccc9c2; border-style: solid;padding: 1rem;margin-right: auto; display: flex; flex-wrap: nowrap; gap: 5rem; align-items: baseline; overflow-y: auto;">
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti qui explicabo suscipit, fugiat adipisci pariatur nostrum fuga ducimus reiciendis similique sequi dolorum aut illum vero id tempora et facilis earum.</p>
                     </div>
-                    <div id="inputVelocity" style="width: min-content; display: flex;justify-content: center;flex-direction: column;">
-                        <p style="margin: unset;text-align: center;font-weight: bold; margin-bottom: 1rem; font-size: x-large;">Startgeschwindigkeit</p>
-                    </div>
-                    <div id="checkboxGraphDiv" style="width: min-content; display: flex;justify-content: center;flex-direction: column;">
-                        <p style="margin: unset;text-align: center;font-weight: bold; margin-bottom: 1rem; font-size: x-large; white-space: nowrap;">Graphen anzeigen</p>
-                        <input id="checkboxGraph" type="checkbox" checked>
+                </div>
+                <div style="display: flex; flex-direction: column;">
+                    <h1 style="align-self: flex-start; margin-bottom: 1rem; margin-top: 1rem;">Einstellungen</h1>
+                    <div id="buttonControls" style="max-width: max-content; background-color: #ccc9c2; border-style: solid;padding: 1rem;display: flex; flex-wrap: nowrap; gap: 5rem; align-items: baseline; overflow-y: auto;">
+                        <div id="inputDigitAmount" style="width: min-content; display: flex;justify-content: center;flex-direction: column;">
+                            <p style="margin: unset;text-align: center;font-weight: bold; margin-bottom: 1rem; font-size: large;">Masse</p>
+                        </div>
+                        <div id="inputVelocity" style="width: min-content; display: flex;justify-content: center;flex-direction: column;">
+                            <p style="margin: unset;text-align: center;font-weight: bold; margin-bottom: 1rem; font-size: large;">Startgeschwindigkeit</p>
+                        </div>
+                        <div id="checkboxGraphDiv" style="width: min-content; display: flex;justify-content: center; align-items: center; flex-direction: column;">
+                            <p style="margin: unset;text-align: center;font-weight: bold; margin-bottom: 1rem; font-size: large; white-space: nowrap;">Graphen anzeigen</p>
+                            <label class="switch">
+                                <input id="checkboxGraph" type="checkbox" checked>
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
                     </div>
                 </div>
             </div>
+            <hr style="margin-bottom: 2rem; margin-top: 2rem;">
             <div id="canvasHolder" style="margin-top: 0.5rem; margin-bottom: 0.5rem; width: 100%; height: 100%;"></div>
             <div id="playControls"></div>
             
             <hr style="margin-bottom: 2rem;">
 
 
-            <div id="graphHolder" style="display: flex; justify-content: center; flex-direction: column; align-items: center; margin-bottom: 1rem; margin-top: 0.5rem; margin-bottom: 0.5rem; width: 100%; height: 100%;">
-                <!-- <h1 style="text-align: center;">GRAPH</h1> -->
-            </div>
+            <div id="graphHolder" style="display: flex; justify-content: center; flex-direction: column; align-items: center; margin-bottom: 1rem; margin-top: 0.5rem; margin-bottom: 0.5rem; width: 100%; height: 100%;"></div>
         </main>
     </body>
 </html>

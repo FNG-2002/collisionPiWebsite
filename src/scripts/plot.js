@@ -8,7 +8,6 @@ class PlotHelper{
         var width = select('main').size()['width'];
         var height = 400;
     
-    
         // Initial setup
         p.setup = function() {
         // Create the canvas

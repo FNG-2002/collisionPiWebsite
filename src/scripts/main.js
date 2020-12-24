@@ -47,32 +47,39 @@ function draw() {
 
   updateCounter();
 
-  for (let i = 0; i < timeSteps; i++) {
-    if (block1.collide(block2)) {
-      const newV1 = block1.hit(block2);
-      const newV2 = block2.hit(block1);
-      block1.v = newV1;
-      block2.v = newV2;
-      counter++;
-      
-      //console.log("x: " + Math.sqrt(block2.m)*block2.v*timeSteps + " " + "y: " + Math.sqrt(block1.m)*block1.v*timeSteps);
-      
-      plot.fuegePunktHinzu(Math.sqrt(block2.m)*block2.v*timeSteps, Math.sqrt(block1.m)*block1.v*timeSteps);
+  if (isLooping()){
+    for (let i = 0; i < timeSteps; i++) {
+      if (block1.collide(block2)) {
+        const newV1 = block1.hit(block2);
+        const newV2 = block2.hit(block1);
+        block1.v = newV1;
+        block2.v = newV2;
+        counter++;
+        
+        //console.log("x: " + Math.sqrt(block2.m)*block2.v*timeSteps + " " + "y: " + Math.sqrt(block1.m)*block1.v*timeSteps);
+        if (isRealValue(plot)){
+          plot.fuegePunktHinzu(Math.sqrt(block2.m)*block2.v*timeSteps, Math.sqrt(block1.m)*block1.v*timeSteps);
+        }
+      }
+    
+      if (block1.wall()){
+        block1.reverse();
+        counter++;
+        if (isRealValue(plot)){
+          plot.fuegePunktHinzu(Math.sqrt(block2.m)*block2.v*timeSteps, Math.sqrt(block1.m)*block1.v*timeSteps);
+        }
+      }
+    
+      block1.move();
+      block2.move();
     }
-  
-    if (block1.wall()){
-      block1.reverse();
-      counter++;
-      plot.fuegePunktHinzu(Math.sqrt(block2.m)*block2.v*timeSteps, Math.sqrt(block1.m)*block1.v*timeSteps);
-    }
-  
-    block1.move();
-    block2.move();
   }
 
   block1.show();
   block2.show();
-  plot.aktualisierePlot();
+  if (isRealValue(plot)){
+    plot.aktualisierePlot();
+  }
 
   // Stoppt den Loop, wenn es keine Kollision mehr geben wird
   /*
@@ -129,7 +136,7 @@ function setupGUI(){
 function createBlocks(){
   //           x-Pos. Breite Masse Geschw.
   block1 = new Block(100, 75, 1, 0, 0);
-  block2 = new Block(300, 135, (Number)(mass), startVel/timeSteps, block1.w);
+  block2 = new Block(300, 135, (Number)(mass), (Number)(startVel)/timeSteps, block1.w);
   counter = 0;
 }
 
@@ -141,6 +148,10 @@ function recreatePlot(){
   plot.aktualisierePlot();
 }
 
+function isRealValue(obj){
+ return obj && obj !== 'null' && obj !== 'undefined';
+}
+
 
 // ############## GUI FUNCTION SECTION ############################
 function changeAmountOfDigits(){
@@ -149,16 +160,20 @@ function changeAmountOfDigits(){
       document.getElementById('alert').style.display = "none";
       buttonStart.disabled = false;
       buttonReset.disabled = false;
-      document.getElementById('inputVelocityInput').disabled = false
+      document.getElementById('inputVelocityInput').disabled = false;
+      document.getElementById('checkboxGraph').disabled = false;
       mass = this.value();
       createBlocks();
-      plot.removePlot();
-      recreatePlot();
-      redraw();
+      if (isRealValue(plot)){
+        plot.removePlot();
+        recreatePlot();
+      }
+      redrawBlocksAndCounter();
     } else {
       buttonStart.disabled = true;
       buttonReset.disabled = true;
       document.getElementById('inputVelocityInput').disabled = true;
+      document.getElementById('checkboxGraph').disabled = true;
       document.getElementById('alert').style.display = null;
       //alert("Die Masse muss größer als 0 sein!");
     }
@@ -171,18 +186,35 @@ function changeAmountOfDigits(){
 
 function resetAnim(){
   createBlocks();
-  redraw();
-  plot.punkte = [];
-  plot.fuegePunktHinzu(Math.sqrt(block2.m)*block2.v*timeSteps, Math.sqrt(block1.m)*block1.v);
-  plot.aktualisierePlot();
+  redrawBlocksAndCounter();
+  if (isRealValue(plot)){
+    plot.punkte = [];
+    plot.fuegePunktHinzu(Math.sqrt(block2.m)*block2.v*timeSteps, Math.sqrt(block1.m)*block1.v);
+    plot.aktualisierePlot();
+  }
 }
 
 function changeVelocity(){
   startVel = this.value();
   createBlocks();
-  plot.removePlot();
-  recreatePlot();
-  redraw();
+  if (isRealValue(plot)){
+    plot.removePlot();
+    recreatePlot();
+  }
+  redrawBlocksAndCounter();
+}
+
+
+function redrawBlocksAndCounter(){
+  background(colorBG);
+
+  updateCounter();
+
+  block1.show();
+  block2.show();
+  if (isRealValue(plot)){
+    plot.aktualisierePlot();
+  }
 }
 
 
@@ -208,11 +240,12 @@ function toggleGraph(){
     select('#graphHolder').style('display', '');
     createBlocks();
     recreatePlot();
-    redraw();
+    redrawBlocksAndCounter();
   } else {
     plot.removePlot();
+    plot = null;
     select('#graphHolder').style('display', 'none');
     createBlocks();
-    redraw();
+    redrawBlocksAndCounter();
   }
 }
