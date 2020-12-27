@@ -42,6 +42,8 @@ function setup() {
   canvas.width = select('main').size()['width'];
 }
 
+// Entfernt, weil auf dem Handy beim scroll resize() getriggered wird....nervig!
+/*
 function windowResized() {
   resizeCanvas(select('main').size()['width'], 250);
   createBlocks();
@@ -51,6 +53,7 @@ function windowResized() {
     recreatePlot();
   }
 }
+*/
 
 function draw() {
   background(colorBG);

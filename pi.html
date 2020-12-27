@@ -130,6 +130,15 @@
                 border-radius: 50%;
             }
 
+            a{
+                text-decoration: none;
+                color: rgb(153, 103, 11);
+            }
+
+            a:hover{
+                text-decoration: underline;
+            }
+
 
         </style>
     </head>
@@ -151,10 +160,12 @@
                 <p style="text-align: center;"><strong>Achtung!</strong> Die Masse muss größer als 0 sein!</p>
             </div> 
             <div class="breakOnPhone" style="display: flex; flex-direction: row; justify-content: space-between;">
-                <div style="display: flex; flex-direction: column;" >
+                <div style="display: flex; flex-direction: column; width: 100%;" >
                     <h1 style="align-self: flex-start; margin-bottom: 1rem; margin-top: 1rem;">Infos</h1>
-                    <div class="breakOnPhone2" style="height: 100%; background-color: #ccc9c2; border-style: solid;padding: 1rem;margin-right: auto; display: flex; flex-wrap: nowrap; gap: 5rem; align-items: baseline;">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem dolore voluptas quidem impedit asperiores quibusdam doloribus ullam, vero natus libero magnam nemo iste quae tempora magni voluptatibus nihil suscipit mollitia.</p>
+                    <div class="breakOnPhone2" style="height: 100%; background-color: #ccc9c2; border-style: solid;padding: 1rem;display: flex; flex-wrap: nowrap; align-items: baseline; flex-direction: column;">
+                        <p style="margin-top: 1rem; margin-bottom: 1rem;">Die Berechnung ist angelehnt an das Video von <a target="_blank" href="https://www.youtube.com/watch?v=jsYwFizhncE">3Blue1Brown</a>.</p>
+                        <p style="margin-top: 0rem; margin-bottom: 1rem;">Zur Visualisierung haben wir die Library <a target="_blank" href="https://p5js.org/">p5.js</a> genutzt.</p>
+                        <p style="margin-top: 0rem; margin-bottom: 1rem;">Weitere Infos und das Projekt finden Sie auf <a target="_blank" href="https://github.com/FNG-2002/collisionPiWebsite">GitHub</a>.</p>
                     </div>
                 </div>
                 <div style="display: flex; flex-direction: column;">
