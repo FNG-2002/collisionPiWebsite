@@ -22,7 +22,7 @@
                 background-color: #e2ded5;
             }
 
-            @media screen and (max-width: 800px){
+            @media screen and (max-width: 1500px){
                 #main{
                     max-width: 100%;
                     margin: 0.25rem;
@@ -37,6 +37,12 @@
                 .breakOnPhone2{
                     max-width: 100% !important;
                     overflow-y: auto;
+                }
+
+                #buttonControls{
+                    flex-wrap: wrap !important;
+                    justify-content: center !important;
+                    gap: 1rem !important;
                 }
 
             }
@@ -136,7 +142,7 @@
         </div>
         
         <h1>Diskrete Mathematik</h1>
-        <h3>Projektarbeit Hochschule Rhein-Waal Diskrete Mathematik 2020/2021.</h3>
+        <h3>Projektarbeit nameSchule Diskrete Mathematik 2020/2021.</h3>
 
         <hr>
 
@@ -144,16 +150,16 @@
             <div id="alert" style="padding: 0.25rem; background-color: #f44336; color: white; border-radius: 1rem; margin-top: 2rem; max-width: 100%; display: none;">
                 <p style="text-align: center;"><strong>Achtung!</strong> Die Masse muss größer als 0 sein!</p>
             </div> 
-            <div class="breakOnPhone" style="display: flex; flex-direction: row;">
+            <div class="breakOnPhone" style="display: flex; flex-direction: row; justify-content: space-between;">
                 <div style="display: flex; flex-direction: column;" >
                     <h1 style="align-self: flex-start; margin-bottom: 1rem; margin-top: 1rem;">Infos</h1>
-                    <div class="breakOnPhone2" style="height: 100%; background-color: #ccc9c2; border-style: solid;padding: 1rem;margin-right: auto; display: flex; flex-wrap: nowrap; gap: 5rem; align-items: baseline; overflow-y: auto;">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti qui explicabo suscipit, fugiat adipisci pariatur nostrum fuga ducimus reiciendis similique sequi dolorum aut illum vero id tempora et facilis earum.</p>
+                    <div class="breakOnPhone2" style="height: 100%; background-color: #ccc9c2; border-style: solid;padding: 1rem;margin-right: auto; display: flex; flex-wrap: nowrap; gap: 5rem; align-items: baseline;">
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem dolore voluptas quidem impedit asperiores quibusdam doloribus ullam, vero natus libero magnam nemo iste quae tempora magni voluptatibus nihil suscipit mollitia.</p>
                     </div>
                 </div>
                 <div style="display: flex; flex-direction: column;">
                     <h1 style="align-self: flex-start; margin-bottom: 1rem; margin-top: 1rem;">Einstellungen</h1>
-                    <div id="buttonControls" style="max-width: max-content; background-color: #ccc9c2; border-style: solid;padding: 1rem;display: flex; flex-wrap: nowrap; gap: 5rem; align-items: baseline; overflow-y: auto;">
+                    <div id="buttonControls" style="height: 100%; max-width: max-content; background-color: #ccc9c2; border-style: solid;padding: 1rem;display: flex; flex-wrap: nowrap; gap: 5rem; align-items: baseline;">
                         <div id="inputDigitAmount" style="width: min-content; display: flex;justify-content: center;flex-direction: column;">
                             <p style="margin: unset;text-align: center;font-weight: bold; margin-bottom: 1rem; font-size: large;">Masse</p>
                         </div>

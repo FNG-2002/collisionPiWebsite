@@ -42,6 +42,16 @@ function setup() {
   canvas.width = select('main').size()['width'];
 }
 
+function windowResized() {
+  resizeCanvas(select('main').size()['width'], 250);
+  createBlocks();
+  redrawBlocksAndCounter();
+  if (isRealValue(plot)){
+    plot.removePlot();
+    recreatePlot();
+  }
+}
+
 function draw() {
   background(colorBG);
 
