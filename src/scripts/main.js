@@ -1,6 +1,7 @@
 // Script by FG 14.12.2020
 
 let blockImg;
+
 let block1;
 let block2;
 
@@ -21,12 +22,11 @@ let timeSteps = 1000000;
 let plot;
 
 function preload() {
-  blockImg = loadImage('/src/img/block.png');
+  blockImg = loadImage('src/img/block.png');
 }
 
 function setup() {
   noLoop();
-
   //PI (Collision) Canvas
   var canvas = createCanvas(select('main').size()['width'], 250);
   canvas.parent('canvasHolder');
@@ -54,7 +54,6 @@ function windowResized() {
   }
 }
 */
-
 function draw() {
   background(colorBG);
 
@@ -78,6 +77,7 @@ function draw() {
       if (block1.wall()){
         block1.reverse();
         counter++;
+        
         if (isRealValue(plot)){
           plot.fuegePunktHinzu(Math.sqrt(block2.m)*block2.v*timeSteps, Math.sqrt(block1.m)*block1.v*timeSteps);
         }
@@ -86,6 +86,7 @@ function draw() {
       block1.move();
       block2.move();
     }
+    
   }
 
   block1.show();
