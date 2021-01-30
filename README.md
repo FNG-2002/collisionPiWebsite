@@ -6,7 +6,7 @@ Projektarbeit Hochschule Rhein-Waal Diskrete Mathematik 2020/2021.
 
 ### Benutzte Libraries
 
-* [p5js] - Eine von Google entwickelte Open Source OCR Engine.
+* [p5js] - Eine JavaScript Open Source Library zur Visualisierung.
 
 ### Referenzen
 
