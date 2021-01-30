@@ -134,7 +134,7 @@ function setupGUI(){
   inputVelocity.parent('inputVelocity');
   inputVelocity.input(changeVelocity);
 
-  let inputHint = createP("<strong>Achtung:</strong> <br> Bei einem Wert > 100^8 kann es lange dauern!");
+  let inputHint = createP("<strong>Achtung:</strong> <br> Bei einem Wert > 100^7 kann es lange dauern!");
   inputHint.parent('inputDigitAmount');
   inputHint.style('margin', 'unset');
   inputHint.style('margin-top', '0.2rem');
